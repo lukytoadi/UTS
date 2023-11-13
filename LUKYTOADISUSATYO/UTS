@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class MarathonEvent {
+    public static void main(String[] args) {
+        int totalDistance = 25;
+        int checkpointDistance = 2;
+
+        ArrayList<Integer> primes = generatePrimes(totalDistance / checkpointDistance);
+
+        System.out.println("Nomor kupon undian peserta:");
+
+        for (int i = 0; i <= totalDistance; i += checkpointDistance) {
+            int randomIndex = new Random().nextInt(primes.size());
+            int primeNumber = primes.remove(randomIndex);
+            System.out.println("Kilometer " + i + ": " + primeNumber);
+        }
+    }
+
+    // Method untuk menghasilkan bilangan prima hingga batas tertentu
+    private static ArrayList<Integer> generatePrimes(int limit) {
+        ArrayList<Integer> primes = new ArrayList<>();
+
+        for (int i = 2; i <= limit; i++) {
+            if (isPrime(i)) {
+                primes.add(i);
+            }
+        }
+
+        return primes;
+    }
+
+    // Method untuk memeriksa apakah suatu bilangan adalah prima
+    private static boolean isPrime(int num) {
+        if (num < 2) {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
